@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         fun checkAnswer(userAnswer: Boolean){
             val correctAnswer = quizViewModel.currentQuestionAnswer
             if (userAnswer == correctAnswer){
-                val toast1 = Toast.makeText(this, R.string.hello,Toast.LENGTH_LONG)
+                val toast1 = Toast.makeText(this, R.string.good_bye,Toast.LENGTH_LONG)
                 toast1.setGravity(Gravity.TOP,0,0)
                 toast1.show()
                 correct+=1
@@ -137,6 +137,14 @@ class MainActivity : AppCompatActivity() {
             falseButton.setEnabled(true)
 
         }
+        previousButton.setOnClickListener {
+            quizViewModel.moveToPrevious()
+            updateQuestions()
+            trueButton.setEnabled(true)
+            falseButton.setEnabled(true)
+
+        }
+        // add a new result button
 
     }
     //***************New, after log processes ***********

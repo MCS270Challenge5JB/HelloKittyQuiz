@@ -77,6 +77,8 @@ class MainActivity : AppCompatActivity() {
                 correct -= correct
                 Log.d(TAG, correct.toString())
             }
+
+            // go to summary page after all questions are checked
         }
 
 

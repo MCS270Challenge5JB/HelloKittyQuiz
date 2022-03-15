@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         fun checkAnswer(userAnswer: Boolean){
             val correctAnswer = quizViewModel.currentQuestionAnswer
             if (userAnswer == correctAnswer){
-                val toast1 = Toast.makeText(this, R.string.correct_toast,Toast.LENGTH_LONG)
+                val toast1 = Toast.makeText(this, R.string.hello,Toast.LENGTH_LONG)
                 toast1.setGravity(Gravity.TOP,0,0)
                 toast1.show()
                 correct+=1

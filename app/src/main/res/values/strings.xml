@@ -13,4 +13,5 @@
     <string name= "warning_text">Are you sure you wanna do this?</string>
     <string name= "show_answer_button">Show me the answer</string>
     <string name="cheat_button">Cheat!</string>
+    <string name="hello">Hello!</string>
 </resources>

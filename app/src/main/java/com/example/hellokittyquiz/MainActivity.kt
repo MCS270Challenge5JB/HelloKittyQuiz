@@ -135,6 +135,14 @@ class MainActivity : AppCompatActivity() {
             falseButton.setEnabled(true)
 
         }
+        previousButton.setOnClickListener {
+            quizViewModel.moveToPrevious()
+            updateQuestions()
+            trueButton.setEnabled(true)
+            falseButton.setEnabled(true)
+
+        }
+        // add a new result button
 
     }
     //***************New, after log processes ***********

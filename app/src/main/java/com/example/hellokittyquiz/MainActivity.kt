@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var previousButton: Button
     private lateinit var cheatButton: Button
     private lateinit var questionTextView: TextView
+    private lateinit var summaryButton: Button
 
     private val quizViewModel:QuizViewModel by lazy{
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private var count = 0
     private var correct = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG,  "onCreate(Bundle?) called")
@@ -45,12 +47,15 @@ class MainActivity : AppCompatActivity() {
         previousButton = findViewById(R.id.previous_button)
         cheatButton = findViewById(R.id.cheat_button)
         questionTextView = findViewById(R.id.question_text_view)
+        summaryButton = findViewById(R.id.summary_button)
+
+        summaryButton.setEnabled(false)
 
 
         fun checkAnswer(userAnswer: Boolean){
             val correctAnswer = quizViewModel.currentQuestionAnswer
             if (userAnswer == correctAnswer){
-                val toast1 = Toast.makeText(this, R.string.good_bye,Toast.LENGTH_LONG)
+                val toast1 = Toast.makeText(this, R.string.correct_toast,Toast.LENGTH_LONG)
                 toast1.setGravity(Gravity.TOP,0,0)
                 toast1.show()
                 correct+=1
@@ -66,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             falseButton.setEnabled(false)
             //score
             if(count == 4){
+                summaryButton.setEnabled(true)
                 Log.d(TAG, "BEFORE"+count.toString())
                 count -=count
                 Log.d(TAG, "AFTER"+count.toString())
@@ -144,7 +150,10 @@ class MainActivity : AppCompatActivity() {
             falseButton.setEnabled(true)
 
         }
-        // add a new result button
+
+        summaryButton.setOnClickListener {
+            //go to summary page
+        }
 
     }
     //***************New, after log processes ***********

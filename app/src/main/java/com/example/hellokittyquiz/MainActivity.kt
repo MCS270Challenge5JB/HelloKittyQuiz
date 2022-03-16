@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         summaryButton = findViewById(R.id.summary_button)
 
         summaryButton.setEnabled(false)
+        cheatButton.setEnabled(false)
 
 
         fun checkAnswer(userAnswer: Boolean){
@@ -72,6 +73,9 @@ class MainActivity : AppCompatActivity() {
             //score
             if(count == 4){
                 summaryButton.setEnabled(true)
+                nextButton.setEnabled(false)
+                previousButton.setEnabled(false)
+                cheatButton.setEnabled(false)
                 Log.d(TAG, "BEFORE"+count.toString())
                 count -=count
                 Log.d(TAG, "AFTER"+count.toString())

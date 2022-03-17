@@ -15,4 +15,6 @@
     <string name="cheat_button">Cheat!</string>
     <string name="good_bye">Good bye!!!!</string>
     <string name="summary_button">Summary</string>
+    <string name="score">Your score is $percent %</string>
+    <string name="details_button"> details</string>
 </resources>

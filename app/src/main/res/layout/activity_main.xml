@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_button">
+    </Button>
     <TextView
         android:id = "@+id/question_text_view"
         android:layout_width="wrap_content"
@@ -12,7 +18,7 @@
         android:clickable="true"
         android:gravity="center"
         android:padding = "24dp"
-        tools:text = "@string/kitty1"/>
+        tools:text = "@string/kitty0"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

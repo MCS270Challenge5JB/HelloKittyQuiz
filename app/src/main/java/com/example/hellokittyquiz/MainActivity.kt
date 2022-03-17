@@ -1,13 +1,13 @@
 package com.example.hellokittyquiz
 
-import Question
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import android.R.attr.checked
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
@@ -31,18 +31,19 @@ class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
     private var count = 0
     private var correct = 0
+    val summaryList = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG,  "onCreate(Bundle?) called")
+        Log.d(TAG, "onCreate(Bundle?) called")
         setContentView(R.layout.activity_main)
 
         val provider: ViewModelProvider = ViewModelProviders.of(this)
         val QuizViewModel = provider.get(QuizViewModel::class.java)
-        Log.d(TAG,"We got a QuizViewModel!")
+        Log.d(TAG, "We got a QuizViewModel!")
 
-        trueButton=findViewById(R.id.true_button)
-        falseButton=findViewById(R.id.false_button)
+        trueButton = findViewById(R.id.true_button)
+        falseButton = findViewById(R.id.false_button)
         nextButton = findViewById(R.id.next_button)
         previousButton = findViewById(R.id.previous_button)
         cheatButton = findViewById(R.id.cheat_button)
@@ -53,42 +54,32 @@ class MainActivity : AppCompatActivity() {
         cheatButton.setEnabled(false)
 
 
-        fun checkAnswer(userAnswer: Boolean){
+        fun checkAnswer(userAnswer: Boolean) {
             val correctAnswer = quizViewModel.currentQuestionAnswer
-            if (userAnswer == correctAnswer){
-                val toast1 = Toast.makeText(this, R.string.correct_toast,Toast.LENGTH_LONG)
-                toast1.setGravity(Gravity.TOP,0,0)
+            if (userAnswer == correctAnswer) {
+                val toast1 = Toast.makeText(this, R.string.correct_toast, Toast.LENGTH_LONG)
+                toast1.setGravity(Gravity.TOP, 0, 0)
                 toast1.show()
-                correct+=1
+                correct += 1
+                Log.d(TAG, "correct = " + correct.toString())
 
-                Log.d(TAG, "correct = "+ correct.toString())
-            }
-            else{
-                val toast2 = Toast.makeText(this, R.string.incorrect_toast,Toast.LENGTH_LONG)
-                toast2.setGravity(Gravity.TOP,0,0)
+                summaryList.add("Question" + count + ": Correct")
+            } else {
+                val toast2 = Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_LONG)
+                toast2.setGravity(Gravity.TOP, 0, 0)
                 toast2.show()
+                summaryList.add("Question" + count + ": Incorrect")
             }
             trueButton.setEnabled(false)
             falseButton.setEnabled(false)
             //score
-            if(count == 4){
+            if (count == 4) {
                 summaryButton.setEnabled(true)
                 nextButton.setEnabled(false)
                 previousButton.setEnabled(false)
                 cheatButton.setEnabled(false)
-                Log.d(TAG, "BEFORE"+count.toString())
-                count -=count
-                Log.d(TAG, "AFTER"+count.toString())
-                val percent = ((correct.toDouble()/4) * 100).toInt()
-                val percentage = "Your result is "+ percent+" %"
-                val toast3 = Toast.makeText(this, percentage, Toast.LENGTH_LONG)
-                toast3.setGravity(Gravity.TOP, 0, 0)
-                toast3.show()
-                correct -= correct
-                Log.d(TAG, correct.toString())
             }
 
-            // go to summary page after all questions are checked
         }
 
 
@@ -98,19 +89,19 @@ class MainActivity : AppCompatActivity() {
             //val toast1 = Toast.makeText(this, R.string.correct_toast,Toast.LENGTH_LONG)
             // toast1 set gravity to the top
             //toast1.show();
-            count +=1
+            count += 1
             checkAnswer(true);
 
             Log.d(TAG, count.toString())
 
         }
-        falseButton.setOnClickListener{
+        falseButton.setOnClickListener {
             //do something when you click the false button
             //val toast2 = Toast.makeText(this, R.string.incorrect_toast,Toast.LENGTH_LONG)
             //toast2.show();
             //count +=1
-                count += 1
-                checkAnswer(false)
+            count += 1
+            checkAnswer(false)
 
             Log.d(TAG, count.toString())
 
@@ -121,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        fun updateQuestions(){
+        fun updateQuestions() {
             val questionTextReId = quizViewModel.currentQuestionText
             questionTextView.setText(questionTextReId);
         }
@@ -156,10 +147,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         summaryButton.setOnClickListener {
-            //go to summary page
-        }
+            /*count -= count
+            Log.d(TAG, "AFTER" + count.toString())
+            val percent = ((correct.toDouble() / 4) * 100).toInt()
+            val percentage = "Your result is " + percent + " %" */
 
+            var summaryText = ""
+            summaryText =
+                /*percentage + "\n" + "\n" +*/ summaryList.get(0) + "\n" + summaryList.get(1) + "\n" + summaryList.get(2) + "\n" + summaryList.get(
+                    3
+                )
+            val toast4 = Toast.makeText(this, summaryText, Toast.LENGTH_LONG)
+            toast4.show()
+
+            summaryButton.setEnabled(false)
+
+        }
     }
+
     //***************New, after log processes ***********
     override fun onStart(){
         super.onStart()

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cheatButton: Button
     private lateinit var questionTextView: TextView
     private lateinit var summaryButton: Button
+    private lateinit var startButton: Button
 
     private val quizViewModel:QuizViewModel by lazy{
         ViewModelProviders.of(this).get(QuizViewModel::class.java)
@@ -49,9 +50,14 @@ class MainActivity : AppCompatActivity() {
         cheatButton = findViewById(R.id.cheat_button)
         questionTextView = findViewById(R.id.question_text_view)
         summaryButton = findViewById(R.id.summary_button)
+        startButton = findViewById(R.id.start_button)
 
         summaryButton.setEnabled(false)
         cheatButton.setEnabled(false)
+        trueButton.setEnabled(false)
+        falseButton.setEnabled(false)
+        nextButton.setEnabled(false)
+        previousButton.setEnabled(false)
 
 
         fun checkAnswer(userAnswer: Boolean) {
@@ -117,7 +123,22 @@ class MainActivity : AppCompatActivity() {
             questionTextView.setText(questionTextReId);
         }
 
-        updateQuestions()
+        //updateQuestions()
+        startButton.setOnClickListener {
+            val start_text = "Begin!"
+            val toast5 = Toast.makeText(this, start_text, Toast.LENGTH_LONG)
+            toast5.setGravity(Gravity.TOP, 0, 0)
+            toast5.show()
+            quizViewModel.moveToNext()
+            updateQuestions()
+            trueButton.setEnabled(true)
+            falseButton.setEnabled(true)
+            nextButton.setEnabled(true)
+            previousButton.setEnabled(true)
+            startButton.setEnabled(false)
+
+        }
+
 
         nextButton.setOnClickListener {
             quizViewModel.moveToNext()
@@ -147,14 +168,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         summaryButton.setOnClickListener {
-            /*count -= count
+            count -= count
             Log.d(TAG, "AFTER" + count.toString())
             val percent = ((correct.toDouble() / 4) * 100).toInt()
-            val percentage = "Your result is " + percent + " %" */
+            val percentage = "Your result is " + percent + " %"
 
             var summaryText = ""
             summaryText =
-                /*percentage + "\n" + "\n" +*/ summaryList.get(0) + "\n" + summaryList.get(1) + "\n" + summaryList.get(2) + "\n" + summaryList.get(
+                percentage + "\n" + "\n" + summaryList.get(0) + "\n" + summaryList.get(1) + "\n" + summaryList.get(2) + "\n" + summaryList.get(
                     3
                 )
             val toast4 = Toast.makeText(this, summaryText, Toast.LENGTH_LONG)

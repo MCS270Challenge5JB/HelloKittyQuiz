@@ -8,7 +8,7 @@ import java.lang.reflect.Array.get
 private val TAG = "QuizViewModel"
 class QuizViewModel:ViewModel() {
     // create index counter3
-    private var currentIndex = 0
+    private var currentIndex = -1
     private val TAG = "MainActivity"
 
     // load my questions up by creating a list of Question objects
